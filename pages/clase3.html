@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 3 · Recursos multimedia en HTML</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #050816;
+        --bg-soft: #0b1021;
+        --accent: #ff6b6b;
+        --accent-soft: rgba(255, 107, 107, 0.12);
+        --accent-2: #4dabf7;
+        --text-main: #f8fafc;
+        --text-soft: #cbd5f5;
+        --border-soft: rgba(148, 163, 184, 0.35);
+        --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+        --radius-lg: 24px;
+        --radius-sm: 12px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at top left, #1e293b 0, #020617 50%),
+          radial-gradient(circle at bottom right, #334155 0, #020617 50%);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.88)
+          )
+          border-box;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
+        border-radius: 999px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: conic-gradient(
+          from 180deg,
+          #ff6b6b,
+          #f97316,
+          #22c55e,
+          #06b6d4,
+          #4f46e5,
+          #ec4899,
+          #ff6b6b
+        );
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-badge-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      .logo-text-main {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      .logo-text-sub {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      nav a {
+        color: var(--text-soft);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.16s ease-out;
+        background: transparent;
+      }
+
+      nav a:hover {
+        color: var(--text-main);
+        border-color: rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      nav a.cta {
+        background: linear-gradient(135deg, var(--accent), #f97316);
+        color: #0f172a;
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 14px 30px rgba(248, 113, 113, 0.45);
+      }
+
+      nav a.cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 35px rgba(248, 113, 113, 0.65);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .content-card {
+        border-radius: var(--radius-lg);
+        background: var(--bg-soft);
+        border: 1px solid var(--border-soft);
+        padding: 24px 22px 26px;
+        box-shadow: var(--shadow-soft);
+        color: var(--text-soft);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .content-card h1,
+      .content-card h2,
+      .content-card h3,
+      .content-card h4,
+      .content-card h5,
+      .content-card h6 {
+        margin-top: 1.6em;
+        margin-bottom: 0.6em;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+
+      .content-card h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .content-card p {
+        margin: 0 0 1em;
+      }
+
+      .content-card a {
+        color: var(--accent-2);
+      }
+
+      .content-card code {
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.18em 0.4em;
+        border-radius: 4px;
+        font-size: 0.92em;
+      }
+
+      .content-card pre {
+        background: #020617;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        margin: 0 0 1.2em;
+      }
+
+      .content-card pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .content-card blockquote {
+        margin: 0 0 1em;
+        padding: 0.5em 1em;
+        border-left: 3px solid rgba(148, 163, 184, 0.7);
+        color: var(--text-soft);
+      }
+
+      .content-card ul,
+      .content-card ol {
+        margin: 0 0 1em 1.5em;
+      }
+
+      .content-card table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 0 1.4em;
+        font-size: 13px;
+      }
+
+      .content-card th,
+      .content-card td {
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .content-card th {
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-main);
+      }
+
+      .content-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 8px 0 14px;
+      }
+
+      .content-card hr {
+        border: none;
+        border-top: 1px solid rgba(148, 163, 184, 0.5);
+        margin: 2em 0;
+      }
+
+      footer {
+        margin-top: 8px;
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.8);
+        text-align: center;
+      }
+
+      footer span {
+        color: var(--accent-2);
+      }
+
+      @media (max-width: 840px) {
+        header {
+          border-radius: 18px;
+        }
+
+        .page {
+          padding: 18px 14px 32px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 14px;
+        }
+
+        nav ul {
+          width: 100%;
+          justify-content: space-between;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">
+          <a href="../index.html">
+            <div class="logo-badge">
+              <div class="logo-badge-inner">H</div>
+            </div>
+          </a>
+          <div>
+            <div class="logo-text-main">DocuHTML</div>
+            <div class="logo-text-sub">Guía visual para principiantes</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="clase2.html">Clase 2</a></li>
+            <li><a class="cta" href="clase3.html">Clase 3</a></li>
+            <li><a href="clase4.html">Clase 4</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section class="content-card">
+          <h2>🚀 Clase 3: Recursos Multimedia en HTML</h2>
+          <p>
+            <strong>Tema:</strong> Imágenes, enlaces, listas y rutas (relativas
+            vs absolutas)
+          </p>
+          <hr />
+          <h2>🎯 Objetivo de la clase</h2>
+          <ul>
+            <li>Al terminar esta clase el estudiante podrá:</li>
+            <li>Insertar imágenes en una página web.</li>
+            <li>Crear enlaces que lleven a otras páginas.</li>
+            <li>Organizar información usando listas.</li>
+            <li>Entender cómo funcionan las rutas (paths).</li>
+            <li>Evitar errores comunes cuando algo “no se ve”.</li>
+          </ul>
+          <hr />
+          <h2>🧠 1. ¿Qué es un recurso multimedia?</h2>
+          <p>En la web, no todo es texto.</p>
+          <p>Un recurso multimedia puede ser:</p>
+          <ul>
+            <li>🖼️ Imágenes</li>
+            <li>🎥 Videos</li>
+            <li>🎵 Audio</li>
+            <li>🔗 Enlaces</li>
+            <li>📄 Archivos</li>
+          </ul>
+          <p>Hoy trabajaremos con:</p>
+          <ul>
+            <li><strong>Imágenes</strong></li>
+            <li><strong>Enlaces</strong></li>
+            <li><strong>Listas</strong></li>
+          </ul>
+          <hr />
+          <h2>🖼️ 2. Imágenes en HTML</h2>
+          <p>En HTML, las imágenes se agregan con la etiqueta:</p>
+          <pre><code class="language-xml">&lt;img&gt;
+</code></pre>
+          <p>Pero esta etiqueta necesita información adicional.</p>
+          <hr />
+          <h2>🔹 Sintaxis básica</h2>
+          <pre><code class="language-xml">&lt;img src="imagen.jpg" alt="Descripción de la imagen"&gt;
+</code></pre>
+          <h3>📌 ¿Qué significa cada parte?</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Atributo</th>
+                <th>Qué hace</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>src</td>
+                <td>Indica dónde está la imagen</td>
+              </tr>
+              <tr>
+                <td>alt</td>
+                <td>Texto alternativo si la imagen no carga</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>🔎 Ejemplo real</h2>
+          <pre><code class="language-xml">&lt;img src="perfil.jpg" alt="Foto de perfil de Juan Pérez"&gt;
+</code></pre>
+          <hr />
+          <h2>🎯 ¿Por qué es IMPORTANTE el <code>alt</code>?</h2>
+          <p>Porque:</p>
+          <ul>
+            <li>Mejora la accesibilidad (lectores de pantalla)</li>
+            <li>Ayuda al SEO</li>
+            <li>Se muestra si la imagen falla</li>
+          </ul>
+          <p>
+            💡 Explicación simple:<br />El <code>alt</code> es como describirle
+            la imagen a alguien que no puede verla.
+          </p>
+          <hr />
+          <h2>📏 Buenas prácticas</h2>
+          <p>❌ Evitar:</p>
+          <pre><code class="language-xml">&lt;img src="foto.png"&gt;
+</code></pre>
+          <p>✅ Mejor:</p>
+          <pre><code class="language-xml">&lt;img src="foto.png" alt="Foto profesional con fondo blanco"&gt;
+</code></pre>
+          <hr />
+          <h2>🔗 3. Enlaces (Links)</h2>
+          <p>Los enlaces son lo que hace que la web sea una red.</p>
+          <p>Se crean con la etiqueta:</p>
+          <pre><code class="language-xml">&lt;a&gt;
+</code></pre>
+          <hr />
+          <h2>🔹 Sintaxis básica</h2>
+          <pre><code class="language-xml">&lt;a href="https://google.com"&gt;Ir a Google&lt;/a&gt;
+</code></pre>
+          <h3>📌 Partes importantes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Función</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>href</td>
+                <td>Dirección a la que vamos</td>
+              </tr>
+              <tr>
+                <td>Texto interno</td>
+                <td>Lo que el usuario ve</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>🌍 Abrir en nueva pestaña</h2>
+          <pre><code class="language-xml">&lt;a href="https://google.com" target="_blank"&gt;
+  Ir a Google
+&lt;/a&gt;
+</code></pre>
+          <p><code>target="_blank"</code> → abre en otra pestaña.</p>
+          <hr />
+          <h2>📧 Enlace para enviar email</h2>
+          <pre><code class="language-xml">&lt;a href="mailto:correo@gmail.com"&gt;Enviar correo&lt;/a&gt;
+</code></pre>
+          <hr />
+          <h2>📞 Enlace para llamar</h2>
+          <pre><code class="language-xml">&lt;a href="tel:+5493811234567"&gt;Llamar ahora&lt;/a&gt;
+</code></pre>
+          <p>Perfecto para páginas móviles 📱</p>
+          <hr />
+          <h2>📋 4. Listas en HTML</h2>
+          <p>Las listas organizan información.</p>
+          <p>Hay 3 tipos:</p>
+          <hr />
+          <h2>🔹 1️⃣ Lista no-ordenada (ul)</h2>
+          <p>Para elementos sin orden específico.</p>
+          <pre><code class="language-xml">&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+          <p>Resultado:<br />• HTML<br />• CSS<br />• JavaScript</p>
+          <hr />
+          <h2>🔹 2️⃣ Lista ordenada (ol)</h2>
+          <p>Cuando importa el orden.</p>
+          <pre><code class="language-xml">&lt;ol&gt;
+  &lt;li&gt;Encender la computadora&lt;/li&gt;
+  &lt;li&gt;Abrir VS Code&lt;/li&gt;
+  &lt;li&gt;Escribir código&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+          <p>Resultado:</p>
+          <ol>
+            <li>Encender la computadora</li>
+            <li>Abrir VS Code</li>
+            <li>Escribir código</li>
+          </ol>
+          <hr />
+          <h2>🔹 3️⃣ Lista descriptiva (dl)</h2>
+          <p>Para definiciones.</p>
+          <pre><code class="language-xml">&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Lenguaje de estructura web&lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Lenguaje de estilos&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+          <hr />
+          <h2>🗂️ 5. Rutas: Relativas vs Absolutas</h2>
+          <p>Esta parte suele confundir. Vamos a explicarlo simple.</p>
+          <hr />
+          <h2>🏠 Pensalo así:</h2>
+          <p>Tu proyecto es como una casa.</p>
+          <p>Las rutas indican cómo llegar a una habitación.</p>
+          <hr />
+          <h2>🌍 Ruta Absoluta</h2>
+          <p>Es la dirección completa.</p>
+          <p>Ejemplo:</p>
+          <pre><code class="language-xml">&lt;img src="https://misitio.com/imagenes/foto.jpg"&gt;
+</code></pre>
+          <p>Es como decir:</p>
+          <p>"Vivís en Argentina, Tucumán, Monteros, Calle X 123"</p>
+          <p>Siempre funciona, aunque cambies de lugar.</p>
+          <hr />
+          <h2>📁 Ruta Relativa</h2>
+          <p>Es la dirección dentro de tu proyecto.</p>
+          <p>Si tu estructura es:</p>
+          <pre><code class="language-xml">proyecto/
+ ├── index.html
+ ├── imagenes/
+      └── perfil.jpg
+</code></pre>
+          <p>Entonces:</p>
+          <pre><code class="language-xml">&lt;img src="imagenes/perfil.jpg"&gt;
+</code></pre>
+          <p>Eso significa:</p>
+          <p>"Entrá a la carpeta imagenes y buscá perfil.jpg"</p>
+          <hr />
+          <h2>🔼 Subir un nivel</h2>
+          <p>Si estás en una carpeta y querés subir:</p>
+          <pre><code class="language-xml">../
+</code></pre>
+          <p>Ejemplo:</p>
+          <pre><code class="language-xml">&lt;img src="../imagenes/foto.jpg"&gt;
+</code></pre>
+          <hr />
+          <h2>🎯 Regla de oro</h2>
+          <p>Si la imagen no aparece:</p>
+          <ul>
+            <li>Revisar nombre exacto</li>
+            <li>Revisar mayúsculas/minúsculas</li>
+            <li>Revisar ruta</li>
+          </ul>
+          <p>El 90% de los errores están ahí.</p>
+          <hr />
+          <h2>🧩 6. Ejemplo Integrador</h2>
+          <p>Vamos a crear una mini biografía profesional.</p>
+          <pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Mi Biografía&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Juan Pérez&lt;/h1&gt;
+
+  &lt;img src="imagenes/perfil.jpg" alt="Foto de Juan Pérez"&gt;
+
+  &lt;h2&gt;Sobre mí&lt;/h2&gt;
+  &lt;p&gt;Soy desarrollador web en formación.&lt;/p&gt;
+
+  &lt;h2&gt;Habilidades&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;HTML&lt;/li&gt;
+    &lt;li&gt;CSS&lt;/li&gt;
+    &lt;li&gt;Trabajo en equipo&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2&gt;Contacto&lt;/h2&gt;
+  &lt;a href="mailto:juan@email.com"&gt;Enviar Email&lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+          <hr />
+          <h2>⚠️ Errores Comunes de Principiantes</h2>
+          <p>❌ No cerrar etiquetas</p>
+          <p>❌ Escribir mal el nombre de la imagen</p>
+          <p>❌ Olvidar el atributo <code>alt</code></p>
+          <p>
+            ❌ Poner espacios en nombres de archivos (ej: "foto perfil.jpg")
+          </p>
+          <p>Mejor usar:</p>
+          <pre><code class="language-xml">foto-perfil.jpg
+</code></pre>
+          <hr />
+          <h2>🏋️ Ejercicio en Clase</h2>
+          <p>Modificar su Biografía Profesional agregando:</p>
+          <p>✅ Una imagen de perfil</p>
+          <p>✅ Una lista de habilidades</p>
+          <p>✅ Un enlace a LinkedIn</p>
+          <p>✅ Un enlace para enviar email</p>
+          <hr />
+          <h2>🧠 Mini Desafío Extra</h2>
+          <p>Crear una sección:</p>
+          <pre><code class="language-xml">&lt;h2&gt;Mis Tecnologías Favoritas&lt;/h2&gt;
+</code></pre>
+          <p>Y usar:</p>
+          <ul>
+            <li>Lista ordenada para el ranking</li>
+            <li>Lista no-ordenada para herramientas</li>
+          </ul>
+          <hr />
+          <h2>🎓 Cierre de Clase</h2>
+          <p>Hoy aprendimos:</p>
+          <p>
+            ✔ Cómo insertar imágenes<br />✔ Cómo crear enlaces<br />✔ Cómo usar
+            listas<br />✔ Cómo funcionan las rutas
+          </p>
+          <p>
+            Esto es fundamental para que una página web deje de ser solo texto y
+            empiece a verse profesional.
+          </p>
+          <hr />
+          <h3>CONTENIDO EXTRA</h3>
+          <hr />
+          <h2>🎥 Incorporar Videos de YouTube en HTML</h2>
+          <p>
+            Una página web no solo puede tener imágenes y texto… también puede
+            tener <strong>videos</strong>.
+          </p>
+          <p>
+            Y el método más común es insertar videos desde
+            <strong>YouTube</strong> usando un <code>&lt;iframe&gt;</code>.
+          </p>
+          <hr />
+          <h2>🧠 ¿Qué es un <code>&lt;iframe&gt;</code>?</h2>
+          <p>
+            Un <code>&lt;iframe&gt;</code> es una etiqueta que permite
+            <strong>mostrar contenido externo dentro de tu página web</strong>.
+          </p>
+          <p>Es como “abrir una ventanita” hacia otro sitio.</p>
+          <hr />
+          <h2>🔹 Cómo insertar un video de YouTube paso a paso</h2>
+          <h3>1️⃣ Ir al video en YouTube</h3>
+          <h3>2️⃣ Hacer clic en “Compartir”</h3>
+          <h3>3️⃣ Elegir “Insertar”</h3>
+          <h3>4️⃣ Copiar el código que aparece</h3>
+          <p>YouTube te dará algo como esto:</p>
+          <pre><code class="language-xml">&lt;iframe width="560" height="315" 
+src="https://www.youtube.com/embed/ID_DEL_VIDEO" 
+title="YouTube video player" 
+frameborder="0" 
+allowfullscreen&gt;
+&lt;/iframe&gt;
+</code></pre>
+          <hr />
+          <h2>📌 Explicación simple de cada parte</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Atributo</th>
+                <th>Qué hace</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>width</td>
+                <td>Ancho del video</td>
+              </tr>
+              <tr>
+                <td>height</td>
+                <td>Alto del video</td>
+              </tr>
+              <tr>
+                <td>src</td>
+                <td>Dirección del video (muy importante)</td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>Describe el contenido (accesibilidad)</td>
+              </tr>
+              <tr>
+                <td>allowfullscreen</td>
+                <td>Permite pantalla completa</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>⚠️ IMPORTANTE</h2>
+          <p>No se usa la URL normal del navegador:</p>
+          <p>❌ Incorrecto:</p>
+          <pre><code class="language-plaintext">https://www.youtube.com/watch?v=abc123
+</code></pre>
+          <p>✅ Correcto:</p>
+          <pre><code class="language-plaintext">https://www.youtube.com/embed/abc123
+</code></pre>
+          <p>
+            YouTube transforma automáticamente la URL cuando copiás desde
+            “Insertar”.
+          </p>
+          <hr />
+          <h2>🧩 Ejemplo práctico en una biografía profesional</h2>
+          <pre><code class="language-xml">&lt;section&gt;
+  &lt;h2&gt;Mi presentación en video&lt;/h2&gt;
+
+  &lt;iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/abc123"
+    title="Video de presentación"
+    allowfullscreen&gt;
+  &lt;/iframe&gt;
+
+&lt;/section&gt;
+</code></pre>
+          <hr />
+          <h2>📱 ¿Y en dispositivos móviles?</h2>
+          <p>
+            Más adelante, cuando vean Responsive Design, aprenderán a hacer que
+            el video:
+          </p>
+          <ul>
+            <li>Se adapte al ancho de pantalla</li>
+            <li>No se desborde</li>
+            <li>Mantenga proporción</li>
+          </ul>
+          <p>Pero por ahora, alcanza con entender cómo insertarlo.</p>
+          <hr />
+          <h2>🚀 Buenas prácticas</h2>
+          <p>
+            ✔ Siempre usar el código que provee YouTube<br />✔ Agregar
+            <code>title</code> descriptivo<br />✔ Colocar el video dentro de una
+            sección con encabezado<br />✔ No abusar de demasiados videos en una
+            misma página
+          </p>
+          <hr />
+          <h2>🧠 Concepto importante</h2>
+          <p>
+            Cuando usamos <code>&lt;iframe&gt;</code>, estamos
+            <strong>mostrando contenido externo</strong>, no lo estamos
+            guardando en nuestro servidor.
+          </p>
+          <p>Eso significa:</p>
+          <ul>
+            <li>El video sigue alojado en YouTube</li>
+            <li>Si YouTube elimina el video, desaparece de nuestra web</li>
+            <li>No estamos descargando el archivo</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        Clase 3 · HTML para principiantes ·
+        <span>imágenes, enlaces, listas y rutas.</span>
+      </footer>
+    </div>
+  </body>
+</html>

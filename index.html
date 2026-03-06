@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML para principiantes</title>
+
+    <!-- Fuente moderna y limpia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #050816;
+        --bg-soft: #0b1021;
+        --accent: #ff6b6b;
+        --accent-soft: rgba(255, 107, 107, 0.12);
+        --accent-2: #4dabf7;
+        --text-main: #f8fafc;
+        --text-soft: #cbd5f5;
+        --border-soft: rgba(148, 163, 184, 0.35);
+        --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+        --radius-lg: 24px;
+        --radius-sm: 12px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at top left, #1e293b 0, #020617 50%),
+          radial-gradient(circle at bottom right, #334155 0, #020617 50%);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.88)
+          )
+          border-box;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
+        border-radius: 999px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: conic-gradient(
+          from 180deg,
+          #ff6b6b,
+          #f97316,
+          #22c55e,
+          #06b6d4,
+          #4f46e5,
+          #ec4899,
+          #ff6b6b
+        );
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-badge-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      .logo-text-main {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      .logo-text-sub {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      nav a {
+        color: var(--text-soft);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.16s ease-out;
+        background: transparent;
+      }
+
+      nav a:hover {
+        color: var(--text-main);
+        border-color: rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      nav a.cta {
+        background: linear-gradient(135deg, var(--accent), #f97316);
+        color: #0f172a;
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 14px 30px rgba(248, 113, 113, 0.45);
+      }
+
+      nav a.cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 35px rgba(248, 113, 113, 0.65);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 28px;
+        padding: 26px 22px;
+        border-radius: var(--radius-lg);
+        background:
+          radial-gradient(circle at top right, #1d4ed8 0, transparent 55%),
+          radial-gradient(circle at bottom left, #be185d 0, transparent 55%),
+          linear-gradient(135deg, #020617, #020617);
+        border: 1px solid var(--border-soft);
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "<html>";
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        font-family:
+          "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+          Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.45);
+      }
+
+      .hero-text-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent-2);
+        background: rgba(37, 99, 235, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        margin-bottom: 12px;
+      }
+
+      .hero-text-kicker-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
+      }
+
+      .hero h1 {
+        font-size: clamp(28px, 4.1vw, 38px);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin-bottom: 14px;
+      }
+
+      .hero h1 span {
+        background: linear-gradient(135deg, #f97316, #fdba74);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .hero-definition {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-soft);
+        margin-bottom: 14px;
+      }
+
+      .hero-definition strong {
+        color: #e5e7eb;
+      }
+
+      .hero-highlight-box {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px dashed rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.85);
+        font-size: 12px;
+        color: var(--text-soft);
+        margin-bottom: 18px;
+      }
+
+      .hero-highlight-box span {
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: #fecaca;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn-primary {
+        border: none;
+        cursor: pointer;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #0f172a;
+        background: linear-gradient(135deg, var(--accent), #f97316);
+        box-shadow: 0 14px 32px rgba(248, 113, 113, 0.55);
+        transition:
+          transform 0.16s ease-out,
+          box-shadow 0.16s ease-out;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 38px rgba(248, 113, 113, 0.75);
+      }
+
+      .btn-ghost {
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-size: 13px;
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-soft);
+      }
+
+      .students-note {
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.9);
+      }
+
+      .hero-media {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-media-card {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: radial-gradient(circle at top left, #1d4ed8 0, #020617 50%);
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+      }
+
+      .hero-media-card img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        display: block;
+        filter: saturate(1.1);
+      }
+
+      .hero-media-tag {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .hero-media-tag-badge {
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: rgba(34, 197, 94, 0.16);
+        color: #bbf7d0;
+        font-size: 10px;
+      }
+
+      .hero-media-glow {
+        position: absolute;
+        inset: auto 10% -18px;
+        height: 40px;
+        background: radial-gradient(
+          circle at top,
+          rgba(56, 189, 248, 0.55),
+          transparent
+        );
+        filter: blur(12px);
+        opacity: 0.75;
+      }
+
+      .sections-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .section-card {
+        border-radius: var(--radius-sm);
+        background: radial-gradient(
+          circle at top,
+          rgba(59, 130, 246, 0.25),
+          #020617
+        );
+        border: 1px solid var(--border-soft);
+        padding: 16px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 11px;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.6);
+      }
+
+      .section-tag-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #f97316;
+      }
+
+      .section-card h2 {
+        font-size: 16px;
+        margin-top: 4px;
+      }
+
+      .section-card p {
+        font-size: 13px;
+        color: var(--text-soft);
+        line-height: 1.6;
+      }
+
+      .section-card a {
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+
+      footer {
+        margin-top: 8px;
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.8);
+        text-align: center;
+      }
+
+      footer span {
+        color: var(--accent-2);
+      }
+
+      @media (max-width: 840px) {
+        header {
+          border-radius: 18px;
+        }
+
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          padding: 22px 18px 20px;
+        }
+
+        .hero-media {
+          order: -1;
+        }
+
+        .sections-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 14px;
+        }
+
+        nav ul {
+          width: 100%;
+          justify-content: space-between;
+          font-size: 13px;
+        }
+
+        .page {
+          padding-inline: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">
+          <div class="logo-badge">
+            <div class="logo-badge-inner">H</div>
+          </div>
+          <div>
+            <div class="logo-text-main">DocuHTML</div>
+            <div class="logo-text-sub">Guía visual para principiantes</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="pages/clase2.html">Clase 2</a></li>
+            <li><a href="pages/clase3.html">Clase 3</a></li>
+            <li><a href="pages/clase4.html">Clase 4</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <div class="hero-text-kicker">
+              <span class="hero-text-kicker-dot"></span>
+              Primera parada: entender el HTML
+            </div>
+            <h1>
+              HTML es
+              <span>el idioma que le explica la web a tu navegador</span>.
+            </h1>
+            <p class="hero-definition">
+              <strong>HTML</strong> (HyperText Markup Language) es el lenguaje
+              que organiza títulos, párrafos, imágenes y enlaces para que una
+              página cobre vida. No es solo “etiquetas raras”: es el mapa que
+              guía a tu navegador para construir cada sitio que visitas.
+            </p>
+            <div class="hero-highlight-box">
+              Empieza a leer la web como un desarrollador.
+              <span>&lt;etiquetas&gt;, estructura y mucha curiosidad.</span>
+            </div>
+            <div class="hero-actions">
+              <button class="btn-primary">Comenzar la clase 2</button>
+              <button class="btn-ghost">Ver ejemplos de etiquetas</button>
+              <p class="students-note">
+                Pensado para alumnos que recién empiezan.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <div class="hero-media-card">
+              <img
+                src="https://images.pexels.com/photos/1181565/pexels-photo-1181565.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Estudiantes trabajando con sus computadoras aprendiendo HTML"
+              />
+              <div class="hero-media-tag">
+                <span
+                  >Grupo de estudiantes dándole forma a su primer sitio
+                  web.</span
+                >
+                <span class="hero-media-tag-badge">HTML en acción</span>
+              </div>
+              <div class="hero-media-glow" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sections-grid">
+          <article class="section-card" id="clase2">
+            <div class="section-tag">
+              <span class="section-tag-dot"></span>
+              Clase 2 · Fundamentos
+            </div>
+            <h2>Clase 2: Estructura básica de una página HTML</h2>
+            <p>
+              Aprende qué significan etiquetas como
+              <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> y
+              <code>&lt;body&gt;</code>, y cómo se relacionan para construir
+              cualquier documento.
+            </p>
+            <a href="Pages/clase2.html">Abrir Clase 2 (Pages/clase2.html) →</a>
+          </article>
+
+          <article class="section-card" id="clase3">
+            <div class="section-tag">
+              <span class="section-tag-dot"></span>
+              Clase 3 · Contenido
+            </div>
+            <h2>Clase 3: Títulos, párrafos, listas e imágenes</h2>
+            <p>
+              Descubre cómo darle forma a tus ideas con texto bien organizado,
+              imágenes claras y listas fáciles de seguir para tus visitantes.
+            </p>
+            <a href="Pages/clase3.html">Abrir Clase 3 (Pages/clase3.html) →</a>
+          </article>
+
+          <article class="section-card" id="clase4">
+            <div class="section-tag">
+              <span class="section-tag-dot"></span>
+              Clase 4 · Navegación
+            </div>
+            <h2>Clase 4: Enlaces y mini sitios completos</h2>
+            <p>
+              Conecta páginas entre sí con enlaces y crea tu primer mini sitio
+              web, listo para compartir con el mundo (o con tu profe).
+            </p>
+            <a href="Pages/clase4.html">Abrir Clase 4 (Pages/clase4.html) →</a>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        HTML para principiantes ·
+        <span>crea, experimenta y rompe sin miedo.</span>
+      </footer>
+    </div>
+  </body>
+</html>

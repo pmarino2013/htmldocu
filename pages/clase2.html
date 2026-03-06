@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 2 · Estructura básica HTML</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #050816;
+        --bg-soft: #0b1021;
+        --accent: #ff6b6b;
+        --accent-soft: rgba(255, 107, 107, 0.12);
+        --accent-2: #4dabf7;
+        --text-main: #f8fafc;
+        --text-soft: #cbd5f5;
+        --border-soft: rgba(148, 163, 184, 0.35);
+        --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+        --radius-lg: 24px;
+        --radius-sm: 12px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at top left, #1e293b 0, #020617 50%),
+          radial-gradient(circle at bottom right, #334155 0, #020617 50%);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.88)
+          )
+          border-box;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
+        border-radius: 999px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: conic-gradient(
+          from 180deg,
+          #ff6b6b,
+          #f97316,
+          #22c55e,
+          #06b6d4,
+          #4f46e5,
+          #ec4899,
+          #ff6b6b
+        );
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-badge-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      .logo-text-main {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      .logo-text-sub {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      nav a {
+        color: var(--text-soft);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.16s ease-out;
+        background: transparent;
+      }
+
+      nav a:hover {
+        color: var(--text-main);
+        border-color: rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      nav a.cta {
+        background: linear-gradient(135deg, var(--accent), #f97316);
+        color: #0f172a;
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 14px 30px rgba(248, 113, 113, 0.45);
+      }
+
+      nav a.cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 35px rgba(248, 113, 113, 0.65);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .content-card {
+        border-radius: var(--radius-lg);
+        background: var(--bg-soft);
+        border: 1px solid var(--border-soft);
+        padding: 24px 22px 26px;
+        box-shadow: var(--shadow-soft);
+        color: var(--text-soft);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .content-card h1,
+      .content-card h2,
+      .content-card h3,
+      .content-card h4,
+      .content-card h5,
+      .content-card h6 {
+        margin-top: 1.6em;
+        margin-bottom: 0.6em;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+
+      .content-card h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .content-card p {
+        margin: 0 0 1em;
+      }
+
+      .content-card a {
+        color: var(--accent-2);
+      }
+
+      .content-card code {
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.18em 0.4em;
+        border-radius: 4px;
+        font-size: 0.92em;
+      }
+
+      .content-card pre {
+        background: #020617;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        margin: 0 0 1.2em;
+      }
+
+      .content-card pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .content-card blockquote {
+        margin: 0 0 1em;
+        padding: 0.5em 1em;
+        border-left: 3px solid rgba(148, 163, 184, 0.7);
+        color: var(--text-soft);
+      }
+
+      .content-card ul,
+      .content-card ol {
+        margin: 0 0 1em 1.5em;
+      }
+
+      .content-card table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 0 1.4em;
+        font-size: 13px;
+      }
+
+      .content-card th,
+      .content-card td {
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .content-card th {
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-main);
+      }
+
+      .content-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 8px 0 14px;
+      }
+
+      .content-card hr {
+        border: none;
+        border-top: 1px solid rgba(148, 163, 184, 0.5);
+        margin: 2em 0;
+      }
+
+      footer {
+        margin-top: 8px;
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.8);
+        text-align: center;
+      }
+
+      footer span {
+        color: var(--accent-2);
+      }
+
+      @media (max-width: 840px) {
+        header {
+          border-radius: 18px;
+        }
+
+        .page {
+          padding: 18px 14px 32px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 14px;
+        }
+
+        nav ul {
+          width: 100%;
+          justify-content: space-between;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">
+          <a href="../index.html">
+            <div class="logo-badge">
+              <div class="logo-badge-inner">H</div>
+            </div>
+          </a>
+          <div>
+            <div class="logo-text-main">DocuHTML</div>
+            <div class="logo-text-sub">Guía visual para principiantes</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a class="cta" href="clase2.html">Clase 2</a></li>
+            <li><a href="clase3.html">Clase 3</a></li>
+            <li><a href="clase4.html">Clase 4</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section class="content-card">
+          <h2>HTML (HyperText Markup Language)</h2>
+          <h2>1. Creación del archivo y estructura básica</h2>
+          <p>
+            Para empezar, solo necesitas un editor de código (como VS Code).
+          </p>
+          <ol>
+            <li>Crea una carpeta para tu proyecto.</li>
+            <li>
+              Dentro, crea un archivo llamado
+              <strong><code>index.html</code></strong
+              >.
+            </li>
+          </ol>
+          <ul>
+            <li>
+              <em>Tip:</em> Usamos <code>index</code> porque los servidores
+              buscan este nombre por defecto para mostrar la página principal.
+            </li>
+          </ul>
+          <p>
+            La estructura mínima obligatoria que verás en cualquier sitio
+            profesional es esta:
+          </p>
+          <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+          <hr />
+          <h2>2. La etiqueta y los Metadatos en 2026</h2>
+          <p>
+            El <code>&lt;head&gt;</code> es el "cerebro" oculto. Aquí es donde
+            le dices a los navegadores y buscadores de qué trata tu página. En
+            2026, con el auge de la IA y el SEO semántico, estos son los
+            elementos <strong>imprescindibles</strong>:
+          </p>
+          <ul>
+            <li>
+              <strong><code>charset="UTF-8"</code></strong
+              >: Fundamental para que se lean bien las tildes y la "ñ".
+            </li>
+            <li>
+              <strong><code>viewport</code></strong
+              >: Crucial para que tu web se vea bien en móviles. Sin esto, el
+              sitio se verá diminuto en un iPhone o Android.
+            </li>
+            <li>
+              <strong><code>title</code></strong
+              >: Es el nombre que aparece en la pestaña del navegador.
+            </li>
+            <li>
+              <strong><code>description</code></strong
+              >: Sigue siendo vital para que Google (y los agentes de IA)
+              resuman tu contenido.
+            </li>
+          </ul>
+          <h3>Ejemplo de un moderno y optimizado:</h3>
+          <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Mi Primera Web Semántica&lt;/title&gt;
+    &lt;meta name="description" content="Aprende HTML desde cero con las mejores prácticas de 2026."&gt;
+
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+</code></pre>
+          <hr />
+          <h2>3. El atributo lang: ¿Por qué importa tanto?</h2>
+          <p>
+            Seguro notaste el <code>&lt;html lang="es"&gt;</code>. No es solo un
+            detalle estético.
+          </p>
+          <ul>
+            <li>
+              <strong>Accesibilidad:</strong> Los lectores de pantalla para
+              personas con discapacidad visual lo usan para saber qué acento y
+              pronunciación aplicar.
+            </li>
+            <li>
+              <strong>SEO:</strong> Ayuda a los motores de búsqueda a segmentar
+              tu audiencia por idioma.
+            </li>
+            <li>
+              <strong>Traducción automática:</strong> Permite que navegadores
+              como Chrome ofrezcan traducir la página si el usuario habla otro
+              idioma.
+            </li>
+          </ul>
+          <hr />
+          <h2>4. Semántica: El corazón del HTML moderno</h2>
+          <p>
+            Antiguamente, todo se hacía con etiquetas <code>&lt;div&gt;</code>.
+            Hoy, eso es una mala práctica. La
+            <strong>semántica</strong> significa usar etiquetas que tengan
+            significado tanto para los humanos como para las máquinas.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Etiqueta</th>
+                <th>Propósito</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><header></header></td>
+                <td>
+                  Introducción de la página o sección (logos, navegación).
+                </td>
+              </tr>
+              <tr>
+                <td><nav></nav></td>
+                <td>Contenedor de enlaces de navegación principal.</td>
+              </tr>
+              <tr>
+                <td><main></main></td>
+                <td>
+                  El contenido único y principal de esa página (solo debe haber
+                  uno).
+                </td>
+              </tr>
+              <tr>
+                <td><article></article></td>
+                <td>
+                  Contenido independiente (como un post de blog o una noticia).
+                </td>
+              </tr>
+              <tr>
+                <td><section></section></td>
+                <td>Agrupa contenido relacionado temáticamente.</td>
+              </tr>
+              <tr>
+                <td><footer></footer></td>
+                <td>
+                  El pie de página con información de contacto o enlaces
+                  legales.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>5. Tu primer cuerpo de página ()</h2>
+          <p>
+            Aquí es donde ocurre la magia visible. Un ejemplo semántico sencillo
+            se vería así:
+          </p>
+          <pre><code class="language-html">&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mi Blog de Tecnología&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt; &lt;a href="#"&gt;Inicio&lt;/a&gt; &lt;/li&gt;
+                &lt;li&gt; &lt;a href="#"&gt;Cursos&lt;/a&gt; &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;article&gt;
+            &lt;h2&gt;Aprendiendo HTML en 2026&lt;/h2&gt;
+            &lt;p&gt;La semántica es la clave para que la IA entienda mi contenido.&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt; &amp;copy; 2026 - Creado con pasión por el código.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+</code></pre>
+          <hr />
+          <h3>Resumen para recordar:</h3>
+          <ol>
+            <li>
+              <strong>UTF-8 y Viewport</strong> son los metadatos que no pueden
+              faltar.
+            </li>
+            <li>
+              <strong><code>lang="es"</code></strong> es un estándar de oro para
+              la accesibilidad.
+            </li>
+            <li>
+              <strong>Usa etiquetas semánticas</strong> en lugar de abusar del
+              <code>&lt;div&gt;</code>. Tu SEO te lo agradecerá.
+            </li>
+          </ol>
+          <hr />
+          <h2>Emmet</h2>
+          <p>
+            <strong>Es un motor de abreviaciones integrado en VS Code</strong>
+            que te permite escribir líneas enteras de código usando una sintaxis
+            corta. Escribes un "atajo", presionas <code>Tab</code> (o
+            <code>Enter</code>), y Emmet lo expande mágicamente en código HTML
+            completo.
+          </p>
+          <hr />
+          <h2>1. El truco de magia inicial: El signo de exclamación</h2>
+          <ul>
+            <li>Escribe: <code>!</code></li>
+            <li>Presiona: <code>Tab</code></li>
+            <li>
+              <strong>Resultado:</strong> VS Code genera toda la estructura
+              inicial de un documento HTML5 con los metadatos necesarios para
+              2026.
+            </li>
+          </ul>
+          <hr />
+          <h2>2. Los atajos más útiles (Sintaxis Emmet)</h2>
+          <p>
+            Emmet funciona con símbolos lógicos. Aquí tienes los más comunes
+            para el día a día:
+          </p>
+          <h3>A. Creación de etiquetas simples</h3>
+          <p>
+            Solo escribe el nombre de la etiqueta sin los signos
+            <code>&lt; &gt;</code>.
+          </p>
+          <ul>
+            <li>
+              <code>h1</code> + <code>Tab</code> ➜
+              <code>&lt;h1&gt;&lt;/h1&gt;</code>
+            </li>
+            <li>
+              <code>p</code> + <code>Tab</code> ➜
+              <code>&lt;p&gt;&lt;/p&gt;</code>
+            </li>
+          </ul>
+          <h3>B. Hijos y hermanos (Estructura)</h3>
+          <ul>
+            <li>
+              <p>
+                <strong>Hijo (<code>&gt;</code>):</strong> Para meter una
+                etiqueta dentro de otra.
+              </p>
+            </li>
+            <li>
+              <p>
+                <code>nav&gt;ul&gt;li</code> ➜ Crea un menú con una lista y un
+                ítem dentro.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Hermano (<code>+</code>):</strong> Para poner etiquetas
+                al mismo nivel.
+              </p>
+            </li>
+            <li>
+              <p><code>h1+p</code> ➜ Crea un título y un párrafo debajo.</p>
+            </li>
+          </ul>
+          <h3>C. Multiplicación (*)</h3>
+          <p>¿Necesitas una lista con 5 elementos? No los copies y pegues.</p>
+          <ul>
+            <li>
+              <code>ul&gt;li*5</code> ➜ Crea una lista
+              <code>&lt;ul&gt;</code> con cinco <code>&lt;li&gt;</code> adentro
+              automáticamente.
+            </li>
+          </ul>
+          <h3>D. Clases e IDs (Sintaxis CSS)</h3>
+          <ul>
+            <li>
+              <strong>Clase (<code>.</code>):</strong
+              ><code>section.contenido</code> ➜
+              <code>&lt;section class="contenido"&gt;&lt;/section&gt;</code>
+            </li>
+            <li>
+              <strong>ID (<code>#</code>):</strong><code>div#principal</code> ➜
+              <code>&lt;div id="principal"&gt;&lt;/div&gt;</code>
+            </li>
+            <li>
+              <strong>Combinado:</strong><code>footer.oscuro#pie-web</code> ➜
+              <code
+                >&lt;footer class="oscuro" id="pie-web"&gt;&lt;/footer&gt;</code
+              >
+            </li>
+          </ul>
+          <hr />
+          <h2>3. Un ejemplo "Pro"</h2>
+          <p>
+            Imagina que quieres crear una sección de noticias con un título, una
+            imagen y un párrafo. En lugar de escribir 10 líneas, escribes esto:
+          </p>
+          <blockquote>
+            <p><code>section.noticias&gt;h2+img+p</code></p>
+          </blockquote>
+          <p>Y al presionar <code>Tab</code>, Emmet hace esto por ti:</p>
+          <pre><code class="language-html">&lt;section class="noticias"&gt;
+    &lt;h2&gt; &lt;/h2&gt;
+    &lt;img src="" alt=""&gt;
+    &lt;p&gt; &lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+          <hr />
+          <h2>4. El "Lorem Ipsum" instantáneo</h2>
+          <p>
+            A veces necesitas texto de relleno para ver cómo queda el diseño.
+          </p>
+          <ul>
+            <li>
+              Escribe <code>lorem</code> + <code>Tab</code> y generará un
+              párrafo de texto en latín.
+            </li>
+            <li>
+              Escribe <code>lorem10</code> + <code>Tab</code> y generará
+              exactamente <strong>10 palabras</strong>.
+            </li>
+          </ul>
+          <hr />
+          <h3>¿Por qué deberías usarlo siempre?</h3>
+          <ol>
+            <li>
+              <strong>Velocidad:</strong> Escribes un 70% menos de caracteres.
+            </li>
+            <li>
+              <strong>Precisión:</strong> Evitas errores comunes como olvidar
+              cerrar una etiqueta (Emmet las cierra siempre por ti).
+            </li>
+            <li>
+              <strong>Estándar:</strong> Es el lenguaje universal entre
+              desarrolladores senior.
+            </li>
+          </ol>
+          <h2>HTML (HyperText Markup Language)</h2>
+          <h2>1. Creación del archivo y estructura básica</h2>
+          <p>
+            Para empezar, solo necesitas un editor de código (como VS Code).
+          </p>
+          <ol>
+            <li>Crea una carpeta para tu proyecto.</li>
+            <li>Dentro, crea un archivo llamado <code>index.html</code>.</li>
+          </ol>
+          <ul>
+            <li>
+              <em>Tip:</em> Usamos <code>index</code> porque los servidores
+              buscan este nombre por defecto para mostrar la página principal.
+            </li>
+          </ul>
+          <p>
+            La estructura mínima obligatoria que verás en cualquier sitio
+            profesional es esta:
+          </p>
+          <pre><code class="language-plaintext">&lt;!DOCTYPE html&gt;  
+&lt;html lang="es"&gt;  
+&lt;head&gt;  
+&lt;/head&gt;  
+&lt;body&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;  
+  
+</code></pre>
+          <hr />
+          <h2>2. La etiqueta y los Metadatos en 2026</h2>
+          <p>
+            El <code>&lt;head&gt;</code> es el "cerebro" oculto. Aquí es donde
+            le dices a los navegadores y buscadores de qué trata tu página. En
+            2026, con el auge de la IA y el SEO semántico, estos son los
+            elementos <strong>imprescindibles</strong>:
+          </p>
+          <ul>
+            <li>
+              <code>charset="UTF-8"</code>: Fundamental para que se lean bien
+              las tildes y la "ñ".
+            </li>
+            <li>
+              <code>viewport</code>: Crucial para que tu web se vea bien en
+              móviles. Sin esto, el sitio se verá diminuto en un iPhone o
+              Android.
+            </li>
+            <li>
+              <code>title</code>: Es el nombre que aparece en la pestaña del
+              navegador.
+            </li>
+            <li>
+              <code>description</code>: Sigue siendo vital para que Google (y
+              los agentes de IA) resuman tu contenido.
+            </li>
+          </ul>
+          <h3>Ejemplo de un moderno y optimizado:</h3>
+          <pre><code class="language-plaintext">&lt;head&gt;  
+&lt;meta charset="UTF-8"&gt;  
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;  
+&lt;title&gt;Mi Primera Web Semántica&lt;/title&gt;  
+&lt;meta name="description" content="Aprende HTML desde cero con las mejores prácticas de 2026."&gt;  
+  
+&lt;link rel="stylesheet" href="styles.css"&gt;  
+&lt;/head&gt;  
+  
+</code></pre>
+          <hr />
+          <h2>3. El atributo lang: ¿Por qué importa tanto?</h2>
+          <p>
+            Seguro notaste el <code>&lt;html lang="es"&gt;</code>. No es solo un
+            detalle estético.
+          </p>
+          <ul>
+            <li>
+              <strong>Accesibilidad:</strong> Los lectores de pantalla para
+              personas con discapacidad visual lo usan para saber qué acento y
+              pronunciación aplicar.
+            </li>
+            <li>
+              <strong>SEO:</strong> Ayuda a los motores de búsqueda a segmentar
+              tu audiencia por idioma.
+            </li>
+            <li>
+              <strong>Traducción automática:</strong> Permite que navegadores
+              como Chrome ofrezcan traducir la página si el usuario habla otro
+              idioma.
+            </li>
+          </ul>
+          <hr />
+          <h2>4. Semántica: El corazón del HTML moderno</h2>
+          <p>
+            Antiguamente, todo se hacía con etiquetas <code>&lt;div&gt;</code>.
+            Hoy, eso es una mala práctica. La
+            <strong>semántica</strong> significa usar etiquetas que tengan
+            significado tanto para los humanos como para las máquinas.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Etiqueta</th>
+                <th>Propósito</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><header></header></td>
+                <td>
+                  Introducción de la página o sección (logos, navegación).
+                </td>
+              </tr>
+              <tr>
+                <td><nav></nav></td>
+                <td>Contenedor de enlaces de navegación principal.</td>
+              </tr>
+              <tr>
+                <td><main></main></td>
+                <td>
+                  El contenido único y principal de esa página (solo debe haber
+                  uno).
+                </td>
+              </tr>
+              <tr>
+                <td><article></article></td>
+                <td>
+                  Contenido independiente (como un post de blog o una noticia).
+                </td>
+              </tr>
+              <tr>
+                <td><section></section></td>
+                <td>Agrupa contenido relacionado temáticamente.</td>
+              </tr>
+              <tr>
+                <td><footer></footer></td>
+                <td>
+                  El pie de página con información de contacto o enlaces
+                  legales.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>5. Tu primer cuerpo de página ()</h2>
+          <p>
+            Aquí es donde ocurre la magia visible. Un ejemplo semántico sencillo
+            se vería así:
+          </p>
+          <pre><code class="language-plaintext">&lt;body&gt;  
+&lt;header&gt;  
+&lt;h1&gt;Mi Blog de Tecnología&lt;/h1&gt;  
+&lt;nav&gt;  
+&lt;ul&gt;  
+&lt;li&gt;&lt;a href="#"&gt;Inicio&lt;/a&gt;&lt;/li&gt;  
+&lt;li&gt;&lt;a href="#"&gt;Cursos&lt;/a&gt;&lt;/li&gt;  
+&lt;/ul&gt;  
+&lt;/nav&gt;  
+&lt;/header&gt;  
+  
+&lt;main&gt;  
+&lt;article&gt;  
+&lt;h2&gt;Aprendiendo HTML en 2026&lt;/h2&gt;  
+&lt;p&gt;La semántica es la clave para que la IA entienda mi contenido.&lt;/p&gt;  
+&lt;/article&gt;  
+&lt;/main&gt;  
+  
+&lt;footer&gt;  
+&lt;p&gt;&amp;copy; 2026 - Creado con pasión por el código.&lt;/p&gt;  
+&lt;/footer&gt;  
+&lt;/body&gt;  
+  
+</code></pre>
+          <hr />
+          <h3>Resumen para recordar:</h3>
+          <ol>
+            <li>
+              <strong>UTF-8 y Viewport</strong> son los metadatos que no pueden
+              faltar.
+            </li>
+            <li>
+              <code>lang="es"</code> es un estándar de oro para la
+              accesibilidad.
+            </li>
+            <li>
+              <strong>Usa etiquetas semánticas</strong> en lugar de abusar del
+              <code>&lt;div&gt;</code>. Tu SEO te lo agradecerá.
+            </li>
+          </ol>
+          <hr />
+          <h2>Emmet</h2>
+          <p>
+            <strong>Es un motor de abreviaciones integrado en VS Code</strong>
+            que te permite escribir líneas enteras de código usando una sintaxis
+            corta. Escribes un "atajo", presionas <code>Tab</code> (o
+            <code>Enter</code>), y Emmet lo expande mágicamente en código HTML
+            completo.
+          </p>
+          <hr />
+          <h2>1. El truco de magia inicial: El signo de exclamación</h2>
+          <ul>
+            <li>Escribe: <code>!</code></li>
+            <li>Presiona: <code>Tab</code></li>
+            <li>
+              <strong>Resultado:</strong> VS Code genera toda la estructura
+              inicial de un documento HTML5 con los metadatos necesarios para
+              2026.
+            </li>
+          </ul>
+          <hr />
+          <h2>2. Los atajos más útiles (Sintaxis Emmet)</h2>
+          <p>
+            Emmet funciona con símbolos lógicos. Aquí tienes los más comunes
+            para el día a día:
+          </p>
+          <h3>A. Creación de etiquetas simples</h3>
+          <p>
+            Solo escribe el nombre de la etiqueta sin los signos
+            <code>&lt; &gt;</code>.
+          </p>
+          <ul>
+            <li>
+              <code>h1</code> + <code>Tab</code> ➜
+              <code>&lt;h1&gt;&lt;/h1&gt;</code>
+            </li>
+            <li>
+              <code>p</code> + <code>Tab</code> ➜
+              <code>&lt;p&gt;&lt;/p&gt;</code>
+            </li>
+          </ul>
+          <h3>B. Hijos y hermanos (Estructura)</h3>
+          <p>
+            <strong>Hijo (</strong><code>&gt;</code><strong>):</strong> Para
+            meter una etiqueta dentro de otra.
+          </p>
+          <p>
+            <code>nav&gt;ul&gt;li</code> ➜ Crea un menú con una lista y un ítem
+            dentro.
+          </p>
+          <p>
+            <strong>Hermano (</strong><code>+</code><strong>):</strong> Para
+            poner etiquetas al mismo nivel.
+          </p>
+          <p><code>h1+p</code> ➜ Crea un título y un párrafo debajo.</p>
+          <h3>C. Multiplicación (*)</h3>
+          <p>¿Necesitas una lista con 5 elementos? No los copies y pegues.</p>
+          <ul>
+            <li>
+              <code>ul&gt;li*5</code> ➜ Crea una lista
+              <code>&lt;ul&gt;</code> con cinco <code>&lt;li&gt;</code> adentro
+              automáticamente.
+            </li>
+          </ul>
+          <h3>D. Clases e IDs (Sintaxis CSS)</h3>
+          <ul>
+            <li>
+              <strong>Clase (</strong><code>.</code><strong>):</strong
+              ><code>section.contenido</code> ➜
+              <code>&lt;section class="contenido"&gt;&lt;/section&gt;</code>
+            </li>
+            <li>
+              <strong>ID (</strong><code>#</code><strong>):</strong
+              ><code>div#principal</code> ➜
+              <code>&lt;div id="principal"&gt;&lt;/div&gt;</code>
+            </li>
+            <li>
+              <strong>Combinado:</strong><code>footer.oscuro#pie-web</code> ➜
+              <code
+                >&lt;footer class="oscuro" id="pie-web"&gt;&lt;/footer&gt;</code
+              >
+            </li>
+          </ul>
+          <hr />
+          <h2>3. Un ejemplo "Pro"</h2>
+          <p>
+            Imagina que quieres crear una sección de noticias con un título, una
+            imagen y un párrafo. En lugar de escribir 10 líneas, escribes esto:
+          </p>
+          <blockquote>
+            <p><code>section.noticias&gt;h2+img+p</code></p>
+          </blockquote>
+          <p>Y al presionar <code>Tab</code>, Emmet hace esto por ti:</p>
+          <pre><code class="language-plaintext">&lt;section class="noticias"&gt;  
+&lt;h2&gt;&lt;/h2&gt;  
+&lt;img src="" alt=""&gt;  
+&lt;p&gt;&lt;/p&gt;  
+&lt;/section&gt;  
+  
+</code></pre>
+          <hr />
+          <h2>4. El "Lorem Ipsum" instantáneo</h2>
+          <p>
+            A veces necesitas texto de relleno para ver cómo queda el diseño.
+          </p>
+          <ul>
+            <li>
+              Escribe <code>lorem</code> + <code>Tab</code> y generará un
+              párrafo de texto en latín.
+            </li>
+            <li>
+              Escribe <code>lorem10</code> + <code>Tab</code> y generará
+              exactamente <strong>10 palabras</strong>.
+            </li>
+          </ul>
+          <hr />
+          <h3>¿Por qué deberías usarlo siempre?</h3>
+          <ol>
+            <li>
+              <strong>Velocidad:</strong> Escribes un 70% menos de caracteres.
+            </li>
+            <li>
+              <strong>Precisión:</strong> Evitas errores comunes como olvidar
+              cerrar una etiqueta (Emmet las cierra siempre por ti).
+            </li>
+            <li>
+              <strong>Estándar:</strong> Es el lenguaje universal entre
+              desarrolladores senior.
+            </li>
+          </ol>
+        </section>
+      </main>
+
+      <footer>
+        Clase 2 · HTML para principiantes ·
+        <span>estructura básica, head moderno y Emmet.</span>
+      </footer>
+    </div>
+  </body>
+</html>
