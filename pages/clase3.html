@@ -184,7 +184,7 @@
         padding: 24px 22px 26px;
         box-shadow: var(--shadow-soft);
         color: var(--text-soft);
-        font-size: 14px;
+        font-size: clamp(13px, 1.5vw, 14px);
         line-height: 1.8;
       }
 
@@ -288,6 +288,17 @@
         color: var(--accent-2);
       }
 
+      @media (max-width: 1024px) {
+        .page {
+          padding: 20px 18px 32px;
+        }
+
+        .content-card {
+          padding: 22px 20px 24px;
+          font-size: 13.5px;
+        }
+      }
+
       @media (max-width: 840px) {
         header {
           border-radius: 18px;
@@ -309,6 +320,24 @@
           width: 100%;
           justify-content: space-between;
           font-size: 13px;
+          flex-wrap: wrap;
+          row-gap: 8px;
+        }
+
+        .content-card {
+          padding: 18px 14px 20px;
+          font-size: 13px;
+        }
+
+        .content-card table {
+          display: block;
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .content-card pre {
+          font-size: 12px;
+          padding: 14px;
         }
       }
     </style>
