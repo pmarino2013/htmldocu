@@ -1,456 +1,467 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clase 4 · Formularios y tablas en HTML</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 4 · Formularios y tablas en HTML</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-soft: #0b1021;
-      --accent: #ff6b6b;
-      --accent-soft: rgba(255, 107, 107, 0.12);
-      --accent-2: #4dabf7;
-      --text-main: #f8fafc;
-      --text-soft: #cbd5f5;
-      --border-soft: rgba(148, 163, 184, 0.35);
-      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
-      --radius-lg: 24px;
-      --radius-sm: 12px;
-    }
+    <style>
+      :root {
+        --bg: #050816;
+        --bg-soft: #0b1021;
+        --accent: #ff6b6b;
+        --accent-soft: rgba(255, 107, 107, 0.12);
+        --accent-2: #4dabf7;
+        --text-main: #f8fafc;
+        --text-soft: #cbd5f5;
+        --border-soft: rgba(148, 163, 184, 0.35);
+        --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+        --radius-lg: 24px;
+        --radius-sm: 12px;
+      }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      min-height: 100vh;
-      margin: 0;
-      font-family:
-        "Poppins",
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      background:
-        radial-gradient(circle at top left, #1e293b 0, #020617 50%),
-        radial-gradient(circle at bottom right, #334155 0, #020617 50%);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-          135deg,
-          rgba(15, 23, 42, 0.96),
-          rgba(15, 23, 42, 0.88)
-        )
-        border-box;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: conic-gradient(
-        from 180deg,
-        #ff6b6b,
-        #f97316,
-        #22c55e,
-        #06b6d4,
-        #4f46e5,
-        #ec4899,
-        #ff6b6b
-      );
-      padding: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-badge-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    .logo-text-main {
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      font-size: 15px;
-      text-transform: uppercase;
-    }
-
-    .logo-text-sub {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 16px;
-      font-size: 14px;
-    }
-
-    nav a {
-      color: var(--text-soft);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.16s ease-out;
-      background: transparent;
-    }
-
-    nav a:hover {
-      color: var(--text-main);
-      border-color: rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    nav a.cta {
-      background: linear-gradient(135deg, var(--accent), #f97316);
-      color: #0f172a;
-      font-weight: 600;
-      border: none;
-      box-shadow: 0 14px 30px rgba(248, 113, 113, 0.45);
-    }
-
-    nav a.cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 35px rgba(248, 113, 113, 0.65);
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .content-card {
-      border-radius: var(--radius-lg);
-      background: var(--bg-soft);
-      border: 1px solid var(--border-soft);
-      padding: 24px 22px 26px;
-      box-shadow: var(--shadow-soft);
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .content-card h1,
-    .content-card h2,
-    .content-card h3,
-    .content-card h4,
-    .content-card h5,
-    .content-card h6 {
-      margin-top: 1.6em;
-      margin-bottom: 0.6em;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .content-card h2:first-of-type {
-      margin-top: 0;
-    }
-
-    .content-card p {
-      margin: 0 0 1em;
-    }
-
-    .content-card a {
-      color: var(--accent-2);
-    }
-
-    .content-card code {
-      background: rgba(15, 23, 42, 0.9);
-      padding: 0.18em 0.4em;
-      border-radius: 4px;
-      font-size: 0.92em;
-    }
-
-    .content-card pre {
-      background: #020617;
-      padding: 16px;
-      border-radius: 10px;
-      overflow-x: auto;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      margin: 0 0 1.2em;
-    }
-
-    .content-card pre code {
-      background: none;
-      padding: 0;
-    }
-
-    .content-card blockquote {
-      margin: 0 0 1em;
-      padding: 0.5em 1em;
-      border-left: 3px solid rgba(148, 163, 184, 0.7);
-      color: var(--text-soft);
-    }
-
-    .content-card ul,
-    .content-card ol {
-      margin: 0 0 1em 1.5em;
-    }
-
-    .content-card table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 0 0 1.4em;
-      font-size: 13px;
-    }
-
-    .content-card th,
-    .content-card td {
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 8px 12px;
-      text-align: left;
-    }
-
-    .content-card th {
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-main);
-    }
-
-    .content-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      margin: 8px 0 14px;
-    }
-
-    .content-card hr {
-      border: none;
-      border-top: 1px solid rgba(148, 163, 184, 0.5);
-      margin: 2em 0;
-    }
-
-    footer {
-      margin-top: 8px;
-      font-size: 11px;
-      color: rgba(148, 163, 184, 0.8);
-      text-align: center;
-    }
-
-    footer span {
-      color: var(--accent-2);
-    }
-
-    @media (max-width: 840px) {
-      header {
-        border-radius: 18px;
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at top left, #1e293b 0, #020617 50%),
+          radial-gradient(circle at bottom right, #334155 0, #020617 50%);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
       }
 
       .page {
-        padding: 18px 14px 32px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      header {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 14px;
+        gap: 24px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.88)
+          )
+          border-box;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
+        border-radius: 999px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: conic-gradient(
+          from 180deg,
+          #ff6b6b,
+          #f97316,
+          #22c55e,
+          #06b6d4,
+          #4f46e5,
+          #ec4899,
+          #ff6b6b
+        );
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-badge-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      .logo-text-main {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      .logo-text-sub {
+        font-size: 11px;
+        color: var(--text-soft);
       }
 
       nav ul {
+        list-style: none;
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      nav a {
+        color: var(--text-soft);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.16s ease-out;
+        background: transparent;
+      }
+
+      nav a:hover {
+        color: var(--text-main);
+        border-color: rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      nav a.cta {
+        background: linear-gradient(135deg, var(--accent), #f97316);
+        color: #0f172a;
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 14px 30px rgba(248, 113, 113, 0.45);
+      }
+
+      nav a.cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 35px rgba(248, 113, 113, 0.65);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .content-card {
+        border-radius: var(--radius-lg);
+        background: var(--bg-soft);
+        border: 1px solid var(--border-soft);
+        padding: 24px 22px 26px;
+        box-shadow: var(--shadow-soft);
+        color: var(--text-soft);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .content-card h1,
+      .content-card h2,
+      .content-card h3,
+      .content-card h4,
+      .content-card h5,
+      .content-card h6 {
+        margin-top: 1.6em;
+        margin-bottom: 0.6em;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+
+      .content-card h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .content-card p {
+        margin: 0 0 1em;
+      }
+
+      .content-card a {
+        color: var(--accent-2);
+      }
+
+      .content-card code {
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.18em 0.4em;
+        border-radius: 4px;
+        font-size: 0.92em;
+      }
+
+      .content-card pre {
+        background: #020617;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        margin: 0 0 1.2em;
+      }
+
+      .content-card pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .content-card blockquote {
+        margin: 0 0 1em;
+        padding: 0.5em 1em;
+        border-left: 3px solid rgba(148, 163, 184, 0.7);
+        color: var(--text-soft);
+      }
+
+      .content-card ul,
+      .content-card ol {
+        margin: 0 0 1em 1.5em;
+      }
+
+      .content-card table {
+        border-collapse: collapse;
         width: 100%;
-        justify-content: space-between;
+        margin: 0 0 1.4em;
         font-size: 13px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <div class="logo">
-        <div class="logo-badge">
-          <div class="logo-badge-inner">H</div>
-        </div>
-        <div>
-          <div class="logo-text-main">DocuHTML</div>
-          <div class="logo-text-sub">Guía visual para principiantes</div>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="clase2.html">Clase 2</a></li>
-          <li><a href="clase3.html">Clase 3</a></li>
-          <li><a class="cta" href="clase4.html">Clase 4</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <main>
-      <section class="content-card">
-<h2>🚀 Clase 4: Formularios y Tablas en HTML</h2>
-<p><strong>Tema:</strong> Recolección de datos y organización de información</p>
-<hr>
-<h2>🎯 Objetivo de la clase</h2>
-<p>Al finalizar la clase, el estudiante podrá:</p>
-<ul>
-<li>Crear formularios funcionales en HTML</li>
-<li>Entender los principales tipos de inputs</li>
-<li>Usar validaciones nativas</li>
-<li>Crear tablas correctamente estructuradas</li>
-<li>Incorporar estos elementos en su Biografía Profesional</li>
-</ul>
-<hr>
-<h2>🧠 1. ¿Qué es un formulario?</h2>
-<p>Un formulario es la forma que tiene una página web de <strong>recibir información del usuario</strong>.</p>
-<p>Ejemplos reales:</p>
-<ul>
-<li>Formulario de contacto</li>
-<li>Registro en una plataforma</li>
-<li>Inicio de sesión</li>
-<li>Suscripción a newsletter</li>
-</ul>
-<hr>
-<h2>🧱 2. Estructura básica de un formulario</h2>
-<p>La etiqueta principal es:</p>
-<pre><code class="language-xml">&lt;form&gt;
+      .content-card th,
+      .content-card td {
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .content-card th {
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-main);
+      }
+
+      .content-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 8px 0 14px;
+      }
+
+      .content-card hr {
+        border: none;
+        border-top: 1px solid rgba(148, 163, 184, 0.5);
+        margin: 2em 0;
+      }
+
+      footer {
+        margin-top: 8px;
+        font-size: 11px;
+        color: rgba(148, 163, 184, 0.8);
+        text-align: center;
+      }
+
+      footer span {
+        color: var(--accent-2);
+      }
+
+      @media (max-width: 840px) {
+        header {
+          border-radius: 18px;
+        }
+
+        .page {
+          padding: 18px 14px 32px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 14px;
+        }
+
+        nav ul {
+          width: 100%;
+          justify-content: space-between;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">
+          <a href="/index.html">
+            <div class="logo-badge">
+              <div class="logo-badge-inner">H</div>
+            </div>
+          </a>
+          <div>
+            <div class="logo-text-main">DocuHTML</div>
+            <div class="logo-text-sub">Guía visual para principiantes</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="clase2.html">Clase 2</a></li>
+            <li><a href="clase3.html">Clase 3</a></li>
+            <li><a class="cta" href="clase4.html">Clase 4</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section class="content-card">
+          <h2>🚀 Clase 4: Formularios y Tablas en HTML</h2>
+          <p>
+            <strong>Tema:</strong> Recolección de datos y organización de
+            información
+          </p>
+          <hr />
+          <h2>🎯 Objetivo de la clase</h2>
+          <p>Al finalizar la clase, el estudiante podrá:</p>
+          <ul>
+            <li>Crear formularios funcionales en HTML</li>
+            <li>Entender los principales tipos de inputs</li>
+            <li>Usar validaciones nativas</li>
+            <li>Crear tablas correctamente estructuradas</li>
+            <li>Incorporar estos elementos en su Biografía Profesional</li>
+          </ul>
+          <hr />
+          <h2>🧠 1. ¿Qué es un formulario?</h2>
+          <p>
+            Un formulario es la forma que tiene una página web de
+            <strong>recibir información del usuario</strong>.
+          </p>
+          <p>Ejemplos reales:</p>
+          <ul>
+            <li>Formulario de contacto</li>
+            <li>Registro en una plataforma</li>
+            <li>Inicio de sesión</li>
+            <li>Suscripción a newsletter</li>
+          </ul>
+          <hr />
+          <h2>🧱 2. Estructura básica de un formulario</h2>
+          <p>La etiqueta principal es:</p>
+          <pre><code class="language-xml">&lt;form&gt;
 &lt;/form&gt;
 </code></pre>
-<p>Pero sola no hace nada. Necesita <strong>inputs</strong> (campos de entrada).</p>
-<hr>
-<h2>🔹 Ejemplo mínimo</h2>
-<pre><code class="language-xml">&lt;form&gt;
+          <p>
+            Pero sola no hace nada. Necesita <strong>inputs</strong> (campos de
+            entrada).
+          </p>
+          <hr />
+          <h2>🔹 Ejemplo mínimo</h2>
+          <pre><code class="language-xml">&lt;form&gt;
   &lt;input type="text"&gt;
 &lt;/form&gt;
 </code></pre>
-<p>Eso crea un campo donde el usuario puede escribir.</p>
-<hr>
-<h2>📌 3. Los tipos de Input más importantes</h2>
-<hr>
-<h2>📝 1️⃣ Texto</h2>
-<pre><code class="language-xml">&lt;input type="text"&gt;
+          <p>Eso crea un campo donde el usuario puede escribir.</p>
+          <hr />
+          <h2>📌 3. Los tipos de Input más importantes</h2>
+          <hr />
+          <h2>📝 1️⃣ Texto</h2>
+          <pre><code class="language-xml">&lt;input type="text"&gt;
 </code></pre>
-<p>Sirve para nombres, ciudades, etc.</p>
-<hr>
-<h2>📧 2️⃣ Email</h2>
-<pre><code class="language-xml">&lt;input type="email"&gt;
+          <p>Sirve para nombres, ciudades, etc.</p>
+          <hr />
+          <h2>📧 2️⃣ Email</h2>
+          <pre><code class="language-xml">&lt;input type="email"&gt;
 </code></pre>
-<p>Valida automáticamente que tenga formato de correo.</p>
-<p>Si el usuario escribe:</p>
-<pre><code class="language-xml">juan@gmail
+          <p>Valida automáticamente que tenga formato de correo.</p>
+          <p>Si el usuario escribe:</p>
+          <pre><code class="language-xml">juan@gmail
 </code></pre>
-<p>El navegador mostrará error.</p>
-<hr>
-<h2>🔢 3️⃣ Número</h2>
-<pre><code class="language-xml">&lt;input type="number"&gt;
+          <p>El navegador mostrará error.</p>
+          <hr />
+          <h2>🔢 3️⃣ Número</h2>
+          <pre><code class="language-xml">&lt;input type="number"&gt;
 </code></pre>
-<p>Solo permite números.</p>
-<hr>
-<h2>🔒 4️⃣ Password</h2>
-<pre><code class="language-xml">&lt;input type="password"&gt;
+          <p>Solo permite números.</p>
+          <hr />
+          <h2>🔒 4️⃣ Password</h2>
+          <pre><code class="language-xml">&lt;input type="password"&gt;
 </code></pre>
-<p>Oculta lo que el usuario escribe.</p>
-<hr>
-<h2>📅 5️⃣ Fecha</h2>
-<pre><code class="language-xml">&lt;input type="date"&gt;
+          <p>Oculta lo que el usuario escribe.</p>
+          <hr />
+          <h2>📅 5️⃣ Fecha</h2>
+          <pre><code class="language-xml">&lt;input type="date"&gt;
 </code></pre>
-<p>Muestra selector de calendario.</p>
-<hr>
-<h2>📋 6️⃣ Área de texto (mensajes largos)</h2>
-<pre><code class="language-xml">&lt;textarea&gt; &lt;/textarea&gt;
+          <p>Muestra selector de calendario.</p>
+          <hr />
+          <h2>📋 6️⃣ Área de texto (mensajes largos)</h2>
+          <pre><code class="language-xml">&lt;textarea&gt; &lt;/textarea&gt;
 </code></pre>
-<p>Ideal para mensajes de contacto.</p>
-<hr>
-<h2>🏷️ 4. La etiqueta <code>&lt;label&gt;</code> (Muy importante)</h2>
-<p>Siempre debemos vincular el texto con el input.</p>
-<p>❌ Incorrecto:</p>
-<pre><code class="language-xml">Nombre
+          <p>Ideal para mensajes de contacto.</p>
+          <hr />
+          <h2>🏷️ 4. La etiqueta <code>&lt;label&gt;</code> (Muy importante)</h2>
+          <p>Siempre debemos vincular el texto con el input.</p>
+          <p>❌ Incorrecto:</p>
+          <pre><code class="language-xml">Nombre
 &lt;input type="text"&gt;
 </code></pre>
-<p>✅ Correcto:</p>
-<pre><code class="language-xml">&lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+          <p>✅ Correcto:</p>
+          <pre><code class="language-xml">&lt;label for="nombre"&gt;Nombre&lt;/label&gt;
 &lt;input type="text" id="nombre"&gt;
 </code></pre>
-<p>Esto mejora:</p>
-<ul>
-<li>Accesibilidad</li>
-<li>Experiencia de usuario</li>
-<li>Profesionalismo</li>
-</ul>
-<hr>
-<h2>🛑 5. Validaciones Nativas</h2>
-<p>HTML permite validar sin usar JavaScript.</p>
-<hr>
-<h2>🔹 Campo obligatorio</h2>
-<pre><code class="language-xml">&lt;input type="text" required&gt;
+          <p>Esto mejora:</p>
+          <ul>
+            <li>Accesibilidad</li>
+            <li>Experiencia de usuario</li>
+            <li>Profesionalismo</li>
+          </ul>
+          <hr />
+          <h2>🛑 5. Validaciones Nativas</h2>
+          <p>HTML permite validar sin usar JavaScript.</p>
+          <hr />
+          <h2>🔹 Campo obligatorio</h2>
+          <pre><code class="language-xml">&lt;input type="text" required&gt;
 </code></pre>
-<hr>
-<h2>🔹 Longitud mínima</h2>
-<pre><code class="language-xml">&lt;input type="password" minlength="6"&gt;
+          <hr />
+          <h2>🔹 Longitud mínima</h2>
+          <pre><code class="language-xml">&lt;input type="password" minlength="6"&gt;
 </code></pre>
-<hr>
-<h2>🔹 Patrón personalizado</h2>
-<pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}"&gt;
+          <hr />
+          <h2>🔹 Patrón personalizado</h2>
+          <pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}"&gt;
 </code></pre>
-<p>Ejemplo: teléfono de 10 números.</p>
-<hr>
-<h2>📬 6. Botón de envío</h2>
-<pre><code class="language-xml">&lt;button type="submit"&gt;Enviar&lt;/button&gt;
+          <p>Ejemplo: teléfono de 10 números.</p>
+          <hr />
+          <h2>📬 6. Botón de envío</h2>
+          <pre><code class="language-xml">&lt;button type="submit"&gt;Enviar&lt;/button&gt;
 </code></pre>
-<p>O también:</p>
-<pre><code class="language-xml">&lt;input type="submit" value="Enviar"&gt;
+          <p>O también:</p>
+          <pre><code class="language-xml">&lt;input type="submit" value="Enviar"&gt;
 </code></pre>
-<hr>
-<h2>🧩 7. Ejemplo completo de formulario de contacto</h2>
-<pre><code class="language-xml">&lt;section&gt;
+          <hr />
+          <h2>🧩 7. Ejemplo completo de formulario de contacto</h2>
+          <pre><code class="language-xml">&lt;section&gt;
   &lt;h2&gt;Contacto&lt;/h2&gt;
 
   &lt;form&gt;
@@ -475,202 +486,237 @@
   &lt;/form&gt;
 &lt;/section&gt;
 </code></pre>
-<hr>
-<h2>🎯 ¿Qué es la propiedad <code>pattern</code>?</h2>
-<p><code>pattern</code> es un atributo de los <code>&lt;input&gt;</code> que permite definir <strong>una regla personalizada de validación usando expresiones regulares (RegEx)</strong>.</p>
-<p>En palabras simples:</p>
-<blockquote>
-<p>Es una forma de decirle al navegador:<br>“Este campo solo acepta texto que cumpla esta forma específica”.</p>
-</blockquote>
-<hr>
-<h2>🧠 ¿Para qué sirve?</h2>
-<p>Sirve para validar formatos específicos cuando:</p>
-<ul>
-<li>El tipo <code>email</code> no es suficiente</li>
-<li>Necesitamos un formato exacto</li>
-<li>Queremos controlar cómo se escribe algo</li>
-</ul>
-<hr>
-<h2>🧱 Sintaxis básica</h2>
-<pre><code class="language-xml">&lt;input type="text" pattern="REGEX_AQUI"&gt;
+          <hr />
+          <h2>🎯 ¿Qué es la propiedad <code>pattern</code>?</h2>
+          <p>
+            <code>pattern</code> es un atributo de los
+            <code>&lt;input&gt;</code> que permite definir
+            <strong
+              >una regla personalizada de validación usando expresiones
+              regulares (RegEx)</strong
+            >.
+          </p>
+          <p>En palabras simples:</p>
+          <blockquote>
+            <p>
+              Es una forma de decirle al navegador:<br />“Este campo solo acepta
+              texto que cumpla esta forma específica”.
+            </p>
+          </blockquote>
+          <hr />
+          <h2>🧠 ¿Para qué sirve?</h2>
+          <p>Sirve para validar formatos específicos cuando:</p>
+          <ul>
+            <li>El tipo <code>email</code> no es suficiente</li>
+            <li>Necesitamos un formato exacto</li>
+            <li>Queremos controlar cómo se escribe algo</li>
+          </ul>
+          <hr />
+          <h2>🧱 Sintaxis básica</h2>
+          <pre><code class="language-xml">&lt;input type="text" pattern="REGEX_AQUI"&gt;
 </code></pre>
-<p>Ejemplo simple:</p>
-<pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}"&gt;
+          <p>Ejemplo simple:</p>
+          <pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}"&gt;
 </code></pre>
-<p>Esto significa:</p>
-<ul>
-<li>Solo números</li>
-<li>Exactamente 10</li>
-<li>Ni más, ni menos</li>
-</ul>
-<hr>
-<h2>🔎 ¿Cómo funciona?</h2>
-<p><code>pattern</code> usa <strong>expresiones regulares (RegEx)</strong>.</p>
-<p>No vamos a profundizar demasiado en RegEx ahora (eso sería otra clase 😉), pero vamos a entender lo básico.</p>
-<hr>
-<h2>📘 Ejemplos prácticos y explicados</h2>
-<hr>
-<h2>📞 1️⃣ Teléfono de 10 números</h2>
-<pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}" required&gt;
+          <p>Esto significa:</p>
+          <ul>
+            <li>Solo números</li>
+            <li>Exactamente 10</li>
+            <li>Ni más, ni menos</li>
+          </ul>
+          <hr />
+          <h2>🔎 ¿Cómo funciona?</h2>
+          <p>
+            <code>pattern</code> usa
+            <strong>expresiones regulares (RegEx)</strong>.
+          </p>
+          <p>
+            No vamos a profundizar demasiado en RegEx ahora (eso sería otra
+            clase 😉), pero vamos a entender lo básico.
+          </p>
+          <hr />
+          <h2>📘 Ejemplos prácticos y explicados</h2>
+          <hr />
+          <h2>📞 1️⃣ Teléfono de 10 números</h2>
+          <pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{10}" required&gt;
 </code></pre>
-<h3>¿Qué significa?</h3>
-<p><code>[0-9]</code> → solo números</p>
-<p><code>{10}</code> → exactamente 10 veces</p>
-<p>✔ Válido:</p>
-<pre><code class="language-xml">3814567890
+          <h3>¿Qué significa?</h3>
+          <p><code>[0-9]</code> → solo números</p>
+          <p><code>{10}</code> → exactamente 10 veces</p>
+          <p>✔ Válido:</p>
+          <pre><code class="language-xml">3814567890
 </code></pre>
-<p>❌ Inválido:</p>
-<pre><code class="language-xml">381-456-7890
+          <p>❌ Inválido:</p>
+          <pre><code class="language-xml">381-456-7890
 </code></pre>
-<hr>
-<h2>🔠 2️⃣ Solo letras</h2>
-<pre><code class="language-xml">&lt;input type="text" pattern="[A-Za-z]+" required&gt;
+          <hr />
+          <h2>🔠 2️⃣ Solo letras</h2>
+          <pre><code class="language-xml">&lt;input type="text" pattern="[A-Za-z]+" required&gt;
 </code></pre>
-<p>Significa:</p>
-<ul>
-<li>Solo letras</li>
-<li>Al menos una</li>
-</ul>
-<p>✔ Válido:</p>
-<pre><code class="language-xml">Juan
+          <p>Significa:</p>
+          <ul>
+            <li>Solo letras</li>
+            <li>Al menos una</li>
+          </ul>
+          <p>✔ Válido:</p>
+          <pre><code class="language-xml">Juan
 </code></pre>
-<p>❌ Inválido:</p>
-<pre><code class="language-xml">Juan123
+          <p>❌ Inválido:</p>
+          <pre><code class="language-xml">Juan123
 </code></pre>
-<hr>
-<h2>🆔 3️⃣ DNI argentino (7 u 8 números)</h2>
-<pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{7,8}" required&gt;
+          <hr />
+          <h2>🆔 3️⃣ DNI argentino (7 u 8 números)</h2>
+          <pre><code class="language-xml">&lt;input type="text" pattern="[0-9]{7,8}" required&gt;
 </code></pre>
-<p>Significa:</p>
-<ul>
-<li>Solo números</li>
-<li>Entre 7 y 8 caracteres</li>
-</ul>
-<hr>
-<h2>🔐 4️⃣ Contraseña con mínimo 8 caracteres, letras y números</h2>
-<pre><code class="language-xml">&lt;input 
+          <p>Significa:</p>
+          <ul>
+            <li>Solo números</li>
+            <li>Entre 7 y 8 caracteres</li>
+          </ul>
+          <hr />
+          <h2>🔐 4️⃣ Contraseña con mínimo 8 caracteres, letras y números</h2>
+          <pre><code class="language-xml">&lt;input 
   type="password" 
   pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" 
   required&gt;
 </code></pre>
-<p>Este es más avanzado, pero significa:</p>
-<ul>
-<li>Al menos una letra</li>
-<li>Al menos un número</li>
-<li>Mínimo 8 caracteres</li>
-</ul>
-<hr>
-<h2>🧠 Algo MUY importante</h2>
-<p><code>pattern</code>:</p>
-<p>✔ Solo funciona cuando el formulario se envía<br>✔ No reemplaza <code>required</code><br>✔ No muestra mensaje personalizado (por defecto)</p>
-<p>Si el valor no cumple el patrón, el navegador mostrará:</p>
-<blockquote>
-<p>“El formato no es válido”</p>
-</blockquote>
-<hr>
-<h2>🎨 Cómo mejorar la experiencia (tip profesional)</h2>
-<p>Podemos agregar el atributo <code>title</code>:</p>
-<pre><code class="language-xml">&lt;input 
+          <p>Este es más avanzado, pero significa:</p>
+          <ul>
+            <li>Al menos una letra</li>
+            <li>Al menos un número</li>
+            <li>Mínimo 8 caracteres</li>
+          </ul>
+          <hr />
+          <h2>🧠 Algo MUY importante</h2>
+          <p><code>pattern</code>:</p>
+          <p>
+            ✔ Solo funciona cuando el formulario se envía<br />✔ No reemplaza
+            <code>required</code><br />✔ No muestra mensaje personalizado (por
+            defecto)
+          </p>
+          <p>Si el valor no cumple el patrón, el navegador mostrará:</p>
+          <blockquote>
+            <p>“El formato no es válido”</p>
+          </blockquote>
+          <hr />
+          <h2>🎨 Cómo mejorar la experiencia (tip profesional)</h2>
+          <p>Podemos agregar el atributo <code>title</code>:</p>
+          <pre><code class="language-xml">&lt;input 
   type="text" 
   pattern="[0-9]{10}" 
   title="Debe contener exactamente 10 números"
   required&gt;
 </code></pre>
-<p>Ahora el navegador mostrará ese mensaje cuando el formato no sea correcto.</p>
-<p>💡 Esto es MUY buena práctica.</p>
-<hr>
-<h2>🧠 ¿Cuándo usar <code>pattern</code>?</h2>
-<p>Usarlo cuando:</p>
-<ul>
-<li>Necesitamos un formato exacto</li>
-<li>El input <code>type</code> no cubre nuestra necesidad</li>
-<li>Queremos controlar estructura específica</li>
-</ul>
-<p>Ejemplos reales:</p>
-<p>✔ Código postal<br>✔ Número de cliente<br>✔ DNI<br>✔ Teléfono sin guiones<br>✔ Usuario sin espacios</p>
-<hr>
-<h2>🚫 ¿Cuándo NO usarlo?</h2>
-<p>No usarlo cuando:</p>
-<ul>
-<li>El tipo ya valida solo (ej: <code>type="email"</code>)</li>
-<li>La validación es demasiado compleja</li>
-<li>Necesitamos mensajes personalizados avanzados (ahí usamos JavaScript)</li>
-</ul>
-<hr>
-<h2>📌 Comparación rápida</h2>
-<table>
-<thead>
-<tr>
-<th>Atributo</th>
-<th>Qué valida</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>type="email"</td>
-<td>Formato básico de email</td>
-</tr>
-<tr>
-<td>required</td>
-<td>Que el campo no esté vacío</td>
-</tr>
-<tr>
-<td>minlength</td>
-<td>Cantidad mínima de caracteres</td>
-</tr>
-<tr>
-<td>pattern</td>
-<td>Formato personalizado exacto</td>
-</tr>
-</tbody></table>
-<hr>
-<h2>🧑‍🏫 Cómo explicarlo</h2>
-<blockquote>
-<p>“El <code>pattern</code> es como poner una plantilla encima del texto.<br>Si lo que escribís no encaja en la plantilla… no pasa.”</p>
-</blockquote>
-<hr>
-<h2>🎯 Resumen</h2>
-<p><code>pattern</code> sirve para:</p>
-<ul>
-<li>Crear reglas personalizadas</li>
-<li>Validar formatos específicos</li>
-<li>Profesionalizar formularios</li>
-<li>Evitar datos mal escritos</li>
-</ul>
-<p>Es una herramienta simple… pero poderosa.</p>
-<hr>
-<h2>📊 8. Tablas en HTML</h2>
-<p>Las tablas sirven para mostrar datos estructurados.</p>
-<p>Ejemplo:</p>
-<ul>
-<li>Estudios realizados</li>
-<li>Experiencia laboral</li>
-<li>Horarios</li>
-<li>Listado de precios</li>
-</ul>
-<hr>
-<h2>🧱 Estructura básica de una tabla</h2>
-<pre><code class="language-xml">&lt;table&gt;
+          <p>
+            Ahora el navegador mostrará ese mensaje cuando el formato no sea
+            correcto.
+          </p>
+          <p>💡 Esto es MUY buena práctica.</p>
+          <hr />
+          <h2>🧠 ¿Cuándo usar <code>pattern</code>?</h2>
+          <p>Usarlo cuando:</p>
+          <ul>
+            <li>Necesitamos un formato exacto</li>
+            <li>El input <code>type</code> no cubre nuestra necesidad</li>
+            <li>Queremos controlar estructura específica</li>
+          </ul>
+          <p>Ejemplos reales:</p>
+          <p>
+            ✔ Código postal<br />✔ Número de cliente<br />✔ DNI<br />✔ Teléfono
+            sin guiones<br />✔ Usuario sin espacios
+          </p>
+          <hr />
+          <h2>🚫 ¿Cuándo NO usarlo?</h2>
+          <p>No usarlo cuando:</p>
+          <ul>
+            <li>El tipo ya valida solo (ej: <code>type="email"</code>)</li>
+            <li>La validación es demasiado compleja</li>
+            <li>
+              Necesitamos mensajes personalizados avanzados (ahí usamos
+              JavaScript)
+            </li>
+          </ul>
+          <hr />
+          <h2>📌 Comparación rápida</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Atributo</th>
+                <th>Qué valida</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type="email"</td>
+                <td>Formato básico de email</td>
+              </tr>
+              <tr>
+                <td>required</td>
+                <td>Que el campo no esté vacío</td>
+              </tr>
+              <tr>
+                <td>minlength</td>
+                <td>Cantidad mínima de caracteres</td>
+              </tr>
+              <tr>
+                <td>pattern</td>
+                <td>Formato personalizado exacto</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2>🧑‍🏫 Cómo explicarlo</h2>
+          <blockquote>
+            <p>
+              “El <code>pattern</code> es como poner una plantilla encima del
+              texto.<br />Si lo que escribís no encaja en la plantilla… no
+              pasa.”
+            </p>
+          </blockquote>
+          <hr />
+          <h2>🎯 Resumen</h2>
+          <p><code>pattern</code> sirve para:</p>
+          <ul>
+            <li>Crear reglas personalizadas</li>
+            <li>Validar formatos específicos</li>
+            <li>Profesionalizar formularios</li>
+            <li>Evitar datos mal escritos</li>
+          </ul>
+          <p>Es una herramienta simple… pero poderosa.</p>
+          <hr />
+          <h2>📊 8. Tablas en HTML</h2>
+          <p>Las tablas sirven para mostrar datos estructurados.</p>
+          <p>Ejemplo:</p>
+          <ul>
+            <li>Estudios realizados</li>
+            <li>Experiencia laboral</li>
+            <li>Horarios</li>
+            <li>Listado de precios</li>
+          </ul>
+          <hr />
+          <h2>🧱 Estructura básica de una tabla</h2>
+          <pre><code class="language-xml">&lt;table&gt;
 &lt;/table&gt;
 </code></pre>
-<p>Pero necesita filas y columnas.</p>
-<hr>
-<h2>🔹 Filas</h2>
-<pre><code class="language-xml">&lt;tr&gt;
+          <p>Pero necesita filas y columnas.</p>
+          <hr />
+          <h2>🔹 Filas</h2>
+          <pre><code class="language-xml">&lt;tr&gt;
 &lt;/tr&gt;
 </code></pre>
-<hr>
-<h2>🔹 Celdas normales</h2>
-<pre><code class="language-xml">&lt;td&gt;
+          <hr />
+          <h2>🔹 Celdas normales</h2>
+          <pre><code class="language-xml">&lt;td&gt;
 &lt;/td&gt;
 </code></pre>
-<hr>
-<h2>🔹 Celdas de encabezado</h2>
-<pre><code class="language-xml">&lt;th&gt;
+          <hr />
+          <h2>🔹 Celdas de encabezado</h2>
+          <pre><code class="language-xml">&lt;th&gt;
 &lt;/th&gt;
 </code></pre>
-<hr>
-<h2>🧩 Ejemplo completo</h2>
-<pre><code class="language-xml">&lt;table border="1"&gt;
+          <hr />
+          <h2>🧩 Ejemplo completo</h2>
+          <pre><code class="language-xml">&lt;table border="1"&gt;
 
   &lt;tr&gt;
     &lt;th&gt;Año&lt;/th&gt;
@@ -692,37 +738,56 @@
 
 &lt;/table&gt;
 </code></pre>
-<hr>
-<h2>📌 Explicación simple</h2>
-<ul>
-<li><code>&lt;table&gt;</code> → la tabla</li>
-<li><code>&lt;tr&gt;</code> → una fila</li>
-<li><code>&lt;th&gt;</code> → encabezado</li>
-<li><code>&lt;td&gt;</code> → datos</li>
-</ul>
-<hr>
-<h2>⚠️ Errores comunes de principiantes</h2>
-<p>❌ No cerrar <code>&lt;tr&gt;</code></p>
-<p>❌ Mezclar <code>&lt;th&gt;</code> y <code>&lt;td&gt;</code> incorrectamente</p>
-<p>❌ Usar tablas para hacer layout (eso ya no se hace)</p>
-<hr>
-<h2>🧠 Concepto profesional importante</h2>
-<p>Las tablas se usan para:</p>
-<p>✔ Datos<br>❌ No para diseño</p>
-<p>El diseño se hace con CSS (lo veremos en próximas semanas).</p>
-<hr>
-<h2>🎓 Cierre de Clase</h2>
-<p>Hoy aprendimos:</p>
-<p>✔ Cómo recibir datos con formularios<br>✔ Cómo validar sin JavaScript<br>✔ Cómo estructurar información con tablas<br>✔ Buenas prácticas profesionales</p>
-<p>Con esto, sus páginas ya empiezan a verse como sitios reales.</p>
-<hr><p><em>Source: <a href="https://tree.taiga.io/project/mateoyapur-comision-web24/us/6?kanban-status=10768746" target="_blank" rel="noopener noreferrer">https://tree.taiga.io/project/mateoyapur-comision-web24/us/6?kanban-status=10768746</a> — Content belongs to its respective owners.</em></p>
-      </section>
-    </main>
+          <hr />
+          <h2>📌 Explicación simple</h2>
+          <ul>
+            <li><code>&lt;table&gt;</code> → la tabla</li>
+            <li><code>&lt;tr&gt;</code> → una fila</li>
+            <li><code>&lt;th&gt;</code> → encabezado</li>
+            <li><code>&lt;td&gt;</code> → datos</li>
+          </ul>
+          <hr />
+          <h2>⚠️ Errores comunes de principiantes</h2>
+          <p>❌ No cerrar <code>&lt;tr&gt;</code></p>
+          <p>
+            ❌ Mezclar <code>&lt;th&gt;</code> y
+            <code>&lt;td&gt;</code> incorrectamente
+          </p>
+          <p>❌ Usar tablas para hacer layout (eso ya no se hace)</p>
+          <hr />
+          <h2>🧠 Concepto profesional importante</h2>
+          <p>Las tablas se usan para:</p>
+          <p>✔ Datos<br />❌ No para diseño</p>
+          <p>El diseño se hace con CSS (lo veremos en próximas semanas).</p>
+          <hr />
+          <h2>🎓 Cierre de Clase</h2>
+          <p>Hoy aprendimos:</p>
+          <p>
+            ✔ Cómo recibir datos con formularios<br />✔ Cómo validar sin
+            JavaScript<br />✔ Cómo estructurar información con tablas<br />✔
+            Buenas prácticas profesionales
+          </p>
+          <p>Con esto, sus páginas ya empiezan a verse como sitios reales.</p>
+          <hr />
+          <p>
+            <em
+              >Source:
+              <a
+                href="https://tree.taiga.io/project/mateoyapur-comision-web24/us/6?kanban-status=10768746"
+                target="_blank"
+                rel="noopener noreferrer"
+                >https://tree.taiga.io/project/mateoyapur-comision-web24/us/6?kanban-status=10768746</a
+              >
+              — Content belongs to its respective owners.</em
+            >
+          </p>
+        </section>
+      </main>
 
-    <footer>
-      Clase 4 · HTML para principiantes ·
-      <span>formularios, validaciones nativas y tablas.</span>
-    </footer>
-  </div>
-</body>
+      <footer>
+        Clase 4 · HTML para principiantes ·
+        <span>formularios, validaciones nativas y tablas.</span>
+      </footer>
+    </div>
+  </body>
 </html>
